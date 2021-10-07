@@ -1,0 +1,27 @@
+name: Testing github actions
+
+on:
+  push: 
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Construyendo la imagen de docker..."
+      - run: docker build -f docker/Dockerfile -t app:build .
+      - run: docker save -o app.tar app:build
+      - run: ls -la
+      - uses: actions/upload-artifact@v2
+        with:
+          name: docker_image
+          path: app.tar
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: docker_image
+      - run: ls -la
