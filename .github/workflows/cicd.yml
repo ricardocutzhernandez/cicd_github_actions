@@ -28,3 +28,13 @@ jobs:
         with:
           name: docker_image
       - run: ls -la
+      - run: echo "Corriendo las pruebas"
+      - run: docker load -i app.tar
+      - run: docker run --rm --name test app:build npm test
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "docker push or docker save..."
