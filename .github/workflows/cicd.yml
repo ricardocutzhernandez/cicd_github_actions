@@ -1,4 +1,4 @@
-name: Testing github actions
+name: cidc example
 
 on:
   push: 
