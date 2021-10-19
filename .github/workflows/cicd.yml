@@ -37,4 +37,8 @@ jobs:
     needs: [test]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: docker_image
+      - run: ls -la
       - run: echo "docker push or docker save..."
