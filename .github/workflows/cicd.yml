@@ -42,3 +42,10 @@ jobs:
           name: docker_image
       - run: ls -la
       - run: echo "docker push or docker save..."
+      - run: docker load -i app.tar
+      - run: docker tag app:build ricardcutzh/cicd-docker:$GITHUB_SHA
+      - run: docker tag app:build ricardcutzh/cicd-docker:githublatest
+      - run: docker login --username $DOCKER_USER --password $DOCKER_PASSWORD
+      - run: docker push ricardcutzh/cicd-docker:$GITHUB_SHA
+      - run: docker push ricardcutzh/cicd-docker:githublatest
+      - run: echo "docker push finalizado"
