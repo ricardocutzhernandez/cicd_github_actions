@@ -16,5 +16,12 @@ pipeline {
                 sh 'npm test'
             }
         }
+
+        step('show') {
+            steps {
+                echo "showing repo"
+                sh 'ls -la'
+            }
+        }
     }
 }
