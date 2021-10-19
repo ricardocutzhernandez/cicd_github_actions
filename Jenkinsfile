@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        step('show') {
+        stage('show') {
             steps {
                 echo "showing repo"
                 sh 'ls -la'
