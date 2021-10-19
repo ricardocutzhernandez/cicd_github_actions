@@ -41,12 +41,10 @@ jobs:
         with:
           name: docker_image
       - run: ls -la
-      - run: echo "docker push or docker save..."
       - run: docker load -i app.tar
       - run: docker tag app:build ricardcutzh/cicd-docker:$GITHUB_SHA
       - run: docker tag app:build ricardcutzh/cicd-docker:githublatest
-      - name: Login to GitHub Package Registry
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+      - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
       - run: docker push ricardcutzh/cicd-docker:$GITHUB_SHA
       - run: docker push ricardcutzh/cicd-docker:githublatest
       - run: echo "docker push finalizado"
